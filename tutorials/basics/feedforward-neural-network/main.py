@@ -54,3 +54,12 @@ model = NeuralNet(input_size, hidden_size, num_classes).to(device)
 # Loss and optimizer
 criterion = nn.CrossEntropyLoss()
 optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)  
+
+
+# Train the model
+total_step = len(train_loader)
+for epoch in range(num_epochs):
+    for i, (images, labels) in enumerate(train_loader):  
+        # Move tensors to the configured device
+        images = images.reshape(-1, 28*28).to(device)
+        labels = labels.to(device)
