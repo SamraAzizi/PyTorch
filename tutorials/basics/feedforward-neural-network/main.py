@@ -6,6 +6,7 @@ import torchvision.transforms as transforms
 
 # Device configuration
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
 # Hyper-parameters 
 input_size = 784
 hidden_size = 500
@@ -24,7 +25,6 @@ test_dataset = torchvision.datasets.MNIST(root='../../data',
                                           train=False, 
                                           transform=transforms.ToTensor())
 
-
 # Data loader
 train_loader = torch.utils.data.DataLoader(dataset=train_dataset, 
                                            batch_size=batch_size, 
@@ -34,7 +34,6 @@ test_loader = torch.utils.data.DataLoader(dataset=test_dataset,
                                           batch_size=batch_size, 
                                           shuffle=False)
 
-
 # Fully connected neural network with one hidden layer
 class NeuralNet(nn.Module):
     def __init__(self, input_size, hidden_size, num_classes):
@@ -42,7 +41,7 @@ class NeuralNet(nn.Module):
         self.fc1 = nn.Linear(input_size, hidden_size) 
         self.relu = nn.ReLU()
         self.fc2 = nn.Linear(hidden_size, num_classes)  
-
+    
     def forward(self, x):
         out = self.fc1(x)
         out = self.relu(out)
@@ -55,7 +54,6 @@ model = NeuralNet(input_size, hidden_size, num_classes).to(device)
 criterion = nn.CrossEntropyLoss()
 optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)  
 
-
 # Train the model
 total_step = len(train_loader)
 for epoch in range(num_epochs):
@@ -63,9 +61,8 @@ for epoch in range(num_epochs):
         # Move tensors to the configured device
         images = images.reshape(-1, 28*28).to(device)
         labels = labels.to(device)
-
-
-         # Forward pass
+        
+        # Forward pass
         outputs = model(images)
         loss = criterion(outputs, labels)
         
@@ -90,3 +87,8 @@ with torch.no_grad():
         _, predicted = torch.max(outputs.data, 1)
         total += labels.size(0)
         correct += (predicted == labels).sum().item()
+
+    print('Accuracy of the network on the 10000 test images: {} %'.format(100 * correct / total))
+
+# Save the model checkpoint
+torch.save(model.state_dict(), 'model.ckpt')
