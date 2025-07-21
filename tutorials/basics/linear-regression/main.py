@@ -35,3 +35,11 @@ for epoch in range(num_epochs):
     # Forward pass
     outputs = model(inputs)
     loss = criterion(outputs, targets)
+
+     # Backward and optimize
+    optimizer.zero_grad()
+    loss.backward()
+    optimizer.step()
+    
+    if (epoch+1) % 5 == 0:
+        print ('Epoch [{}/{}], Loss: {:.4f}'.format(epoch+1, num_epochs, loss.item()))
