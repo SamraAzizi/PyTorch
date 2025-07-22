@@ -35,3 +35,11 @@ model = nn.Linear(input_size, num_classes)
 # nn.CrossEntropyLoss() computes softmax internally
 criterion = nn.CrossEntropyLoss()  
 optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)  
+
+
+# Train the model
+total_step = len(train_loader)
+for epoch in range(num_epochs):
+    for i, (images, labels) in enumerate(train_loader):
+        # Reshape images to (batch_size, input_size)
+        images = images.reshape(-1, input_size)
