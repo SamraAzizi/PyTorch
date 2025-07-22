@@ -30,3 +30,8 @@ test_loader = torch.utils.data.DataLoader(dataset=test_dataset,
 
 # Logistic regression model
 model = nn.Linear(input_size, num_classes)
+
+# Loss and optimizer
+# nn.CrossEntropyLoss() computes softmax internally
+criterion = nn.CrossEntropyLoss()  
+optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)  
