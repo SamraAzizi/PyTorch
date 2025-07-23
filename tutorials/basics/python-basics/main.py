@@ -42,3 +42,13 @@ pred = linear(x)
 # Compute loss.
 loss = criterion(pred, y)
 print('loss: ', loss.item())
+
+# Backward pass.
+loss.backward()
+
+# Print out the gradients.
+print ('dL/dw: ', linear.weight.grad) 
+print ('dL/db: ', linear.bias.grad)
+
+# 1-step gradient descent.
+optimizer.step()
