@@ -20,3 +20,14 @@ y.backward()
 print(x.grad)    # x.grad = 2 
 print(w.grad)    # w.grad = 1 
 print(b.grad)    # b.grad = 1 
+
+
+# 2. Basic autograd example 2
+# Create tensors of shape (10, 3) and (10, 2).
+x = torch.randn(10, 3)
+y = torch.randn(10, 2)
+
+# Build a fully connected layer.
+linear = nn.Linear(3, 2)
+print ('w: ', linear.weight)
+print ('b: ', linear.bias)
