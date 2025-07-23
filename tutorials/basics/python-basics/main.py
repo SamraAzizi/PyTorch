@@ -31,3 +31,14 @@ y = torch.randn(10, 2)
 linear = nn.Linear(3, 2)
 print ('w: ', linear.weight)
 print ('b: ', linear.bias)
+
+# Build loss function and optimizer.
+criterion = nn.MSELoss()
+optimizer = torch.optim.SGD(linear.parameters(), lr=0.01)
+
+# Forward pass.
+pred = linear(x)
+
+# Compute loss.
+loss = criterion(pred, y)
+print('loss: ', loss.item())
