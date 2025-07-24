@@ -101,3 +101,16 @@ images, labels = data_iter.next()
 for images, labels in train_loader:
     # Training code should be written here.
     pass
+
+# 5. Input pipeline for custom dataset 
+# You should build your custom dataset as below.
+class CustomDataset(torch.utils.data.Dataset):
+    def __init__(self):
+        # TODO
+        # 1. Initialize file paths or a list of file names. 
+        pass
+    def __getitem__(self, index):
+        # TODO
+        # 1. Read one data from file (e.g. using numpy.fromfile, PIL.Image.open).
+        # 2. Preprocess the data (e.g. torchvision.Transform).
+        # 3. Return a data pair (e.g. image and label).
