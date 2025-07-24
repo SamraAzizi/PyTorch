@@ -114,3 +114,14 @@ class CustomDataset(torch.utils.data.Dataset):
         # 1. Read one data from file (e.g. using numpy.fromfile, PIL.Image.open).
         # 2. Preprocess the data (e.g. torchvision.Transform).
         # 3. Return a data pair (e.g. image and label).
+
+        pass
+    def __len__(self):
+        # You should change 0 to the total size of your dataset.
+        return 0 
+
+# You can then use the prebuilt data loader. 
+custom_dataset = CustomDataset()
+train_loader = torch.utils.data.DataLoader(dataset=custom_dataset,
+                                           batch_size=64, 
+                                           shuffle=True)
