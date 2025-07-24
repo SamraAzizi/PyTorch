@@ -72,3 +72,16 @@ y = torch.from_numpy(x)
 
 # Convert the torch tensor to a numpy array.
 z = y.numpy()
+
+# 4. Input pipeline
+
+# Download and construct CIFAR-10 dataset.
+train_dataset = torchvision.datasets.CIFAR10(root='../../data/',
+                                             train=True, 
+                                             transform=transforms.ToTensor(),
+                                             download=True)
+
+# Fetch one data pair (read data from disk).
+image, label = train_dataset[0]
+print (image.size())
+print (label)
