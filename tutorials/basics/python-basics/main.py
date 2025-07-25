@@ -125,3 +125,16 @@ custom_dataset = CustomDataset()
 train_loader = torch.utils.data.DataLoader(dataset=custom_dataset,
                                            batch_size=64, 
                                            shuffle=True)
+
+
+# 6. Pretrained model
+
+# Download and load the pretrained ResNet-18.
+resnet = torchvision.models.resnet18(pretrained=True)
+
+# If you want to finetune only the top layer of the model, set as below.
+for param in resnet.parameters():
+    param.requires_grad = False
+
+# Replace the top layer for finetuning.
+resnet.fc = nn.Linear(resnet.fc.in_features, 100)  # 100 is an example.
