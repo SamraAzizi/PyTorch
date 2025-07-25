@@ -138,3 +138,9 @@ for param in resnet.parameters():
 
 # Replace the top layer for finetuning.
 resnet.fc = nn.Linear(resnet.fc.in_features, 100)  # 100 is an example.
+# Forward pass.
+images = torch.randn(64, 3, 224, 224)
+outputs = resnet(images)
+print (outputs.size())     # (64, 100)
+
+# 7. Save and load the model
