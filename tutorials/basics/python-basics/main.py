@@ -144,3 +144,10 @@ outputs = resnet(images)
 print (outputs.size())     # (64, 100)
 
 # 7. Save and load the model
+# Save and load the entire model.
+torch.save(resnet, 'model.ckpt')
+model = torch.load('model.ckpt')
+
+# Save and load only the model parameters (recommended).
+torch.save(resnet.state_dict(), 'params.ckpt')
+resnet.load_state_dict(torch.load('params.ckpt'))
