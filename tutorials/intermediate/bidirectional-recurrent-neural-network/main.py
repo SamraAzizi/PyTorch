@@ -63,3 +63,19 @@ model = BiRNN(input_size, hidden_size, num_layers, num_classes).to(device)
 # Loss and optimizer
 criterion = nn.CrossEntropyLoss()
 optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
+
+# Train the model
+total_step = len(train_loader)
+for epoch in range(num_epochs):
+    for i, (images, labels) in enumerate(train_loader):
+        images = images.reshape(-1, sequence_length, input_size).to(device)
+        labels = labels.to(device)
+        
+        # Forward pass
+        outputs = model(images)
+        loss = criterion(outputs, labels)
+        
+        # Backward and optimize
+        optimizer.zero_grad()
+        loss.backward()
+        optimizer.step()
