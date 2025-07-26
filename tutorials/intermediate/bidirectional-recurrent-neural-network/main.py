@@ -22,6 +22,7 @@ train_dataset = torchvision.datasets.MNIST(root='../../data/',
                                            train=True, 
                                            transform=transforms.ToTensor(),
                                            download=True)
+
 test_dataset = torchvision.datasets.MNIST(root='../../data/',
                                           train=False, 
                                           transform=transforms.ToTensor())
@@ -48,8 +49,7 @@ class BiRNN(nn.Module):
         # Set initial states
         h0 = torch.zeros(self.num_layers*2, x.size(0), self.hidden_size).to(device) # 2 for bidirection 
         c0 = torch.zeros(self.num_layers*2, x.size(0), self.hidden_size).to(device)
-
-
+        
         # Forward propagate LSTM
         out, _ = self.lstm(x, (h0, c0))  # out: tensor of shape (batch_size, seq_length, hidden_size*2)
         
@@ -63,7 +63,7 @@ model = BiRNN(input_size, hidden_size, num_layers, num_classes).to(device)
 # Loss and optimizer
 criterion = nn.CrossEntropyLoss()
 optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
-
+    
 # Train the model
 total_step = len(train_loader)
 for epoch in range(num_epochs):
@@ -79,7 +79,7 @@ for epoch in range(num_epochs):
         optimizer.zero_grad()
         loss.backward()
         optimizer.step()
-
+        
         if (i+1) % 100 == 0:
             print ('Epoch [{}/{}], Step [{}/{}], Loss: {:.4f}' 
                    .format(epoch+1, num_epochs, i+1, total_step, loss.item()))
@@ -92,3 +92,11 @@ with torch.no_grad():
         images = images.reshape(-1, sequence_length, input_size).to(device)
         labels = labels.to(device)
         outputs = model(images)
+        _, predicted = torch.max(outputs.data, 1)
+        total += labels.size(0)
+        correct += (predicted == labels).sum().item()
+
+    print('Test Accuracy of the model on the 10000 test images: {} %'.format(100 * correct / total)) 
+
+# Save the model checkpoint
+torch.save(model.state_dict(), 'model.ckpt')
