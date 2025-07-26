@@ -30,3 +30,14 @@ test_dataset = torchvision.datasets.MNIST(root='../../data/',
 train_loader = torch.utils.data.DataLoader(dataset=train_dataset,
                                            batch_size=batch_size, 
                                            shuffle=True)
+
+test_loader = torch.utils.data.DataLoader(dataset=test_dataset,
+                                          batch_size=batch_size, 
+                                          shuffle=False)
+
+# Bidirectional recurrent neural network (many-to-one)
+class BiRNN(nn.Module):
+    def __init__(self, input_size, hidden_size, num_layers, num_classes):
+        super(BiRNN, self).__init__()
+        self.hidden_size = hidden_size
+        self.num_layers = num_layers
