@@ -47,7 +47,7 @@ class ConvNet(nn.Module):
             nn.ReLU(),
             nn.MaxPool2d(kernel_size=2, stride=2))
         self.fc = nn.Linear(7*7*32, num_classes)
-
+        
     def forward(self, x):
         out = self.layer1(x)
         out = self.layer2(out)
@@ -56,7 +56,6 @@ class ConvNet(nn.Module):
         return out
 
 model = ConvNet(num_classes).to(device)
-
 
 # Loss and optimizer
 criterion = nn.CrossEntropyLoss()
@@ -72,7 +71,7 @@ for epoch in range(num_epochs):
         # Forward pass
         outputs = model(images)
         loss = criterion(outputs, labels)
-
+        
         # Backward and optimize
         optimizer.zero_grad()
         loss.backward()
@@ -81,8 +80,8 @@ for epoch in range(num_epochs):
         if (i+1) % 100 == 0:
             print ('Epoch [{}/{}], Step [{}/{}], Loss: {:.4f}' 
                    .format(epoch+1, num_epochs, i+1, total_step, loss.item()))
-            
-            # Test the model
+
+# Test the model
 model.eval()  # eval mode (batchnorm uses moving mean/variance instead of mini-batch mean/variance)
 with torch.no_grad():
     correct = 0
@@ -90,3 +89,12 @@ with torch.no_grad():
     for images, labels in test_loader:
         images = images.to(device)
         labels = labels.to(device)
+        outputs = model(images)
+        _, predicted = torch.max(outputs.data, 1)
+        total += labels.size(0)
+        correct += (predicted == labels).sum().item()
+
+    print('Test Accuracy of the model on the 10000 test images: {} %'.format(100 * correct / total))
+
+# Save the model checkpoint
+torch.save(model.state_dict(), 'model.ckpt')
