@@ -19,3 +19,14 @@ transform = transforms.Compose([
     transforms.RandomHorizontalFlip(),
     transforms.RandomCrop(32),
     transforms.ToTensor()])
+
+
+# CIFAR-10 dataset
+train_dataset = torchvision.datasets.CIFAR10(root='../../data/',
+                                             train=True, 
+                                             transform=transform,
+                                             download=True)
+
+test_dataset = torchvision.datasets.CIFAR10(root='../../data/',
+                                            train=False, 
+                                            transform=transforms.ToTensor())
