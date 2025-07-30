@@ -84,3 +84,12 @@ class ResNet(nn.Module):
         self.fc = nn.Linear(64, num_classes)
         
     def make_layer(self, block, out_channels, blocks, stride=1):
+
+        downsample = None
+        if (stride != 1) or (self.in_channels != out_channels):
+            downsample = nn.Sequential(
+                conv3x3(self.in_channels, out_channels, stride=stride),
+                nn.BatchNorm2d(out_channels))
+        layers = []
+        layers.append(block(self.in_channels, out_channels, stride, downsample))
+        self.in_channels = out_channels
