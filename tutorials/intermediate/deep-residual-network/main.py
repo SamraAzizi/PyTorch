@@ -142,3 +142,13 @@ for epoch in range(num_epochs):
         optimizer.zero_grad()
         loss.backward()
         optimizer.step()
+
+
+        if (i+1) % 100 == 0:
+            print ("Epoch [{}/{}], Step [{}/{}] Loss: {:.4f}"
+                   .format(epoch+1, num_epochs, i+1, total_step, loss.item()))
+
+    # Decay learning rate
+    if (epoch+1) % 20 == 0:
+        curr_lr /= 3
+        update_lr(optimizer, curr_lr)
