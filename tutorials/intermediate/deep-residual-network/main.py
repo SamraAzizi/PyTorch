@@ -109,3 +109,11 @@ class ResNet(nn.Module):
         out = out.view(out.size(0), -1)
         out = self.fc(out)
         return out
+    
+
+model = ResNet(ResidualBlock, [2, 2, 2]).to(device)
+
+
+# Loss and optimizer
+criterion = nn.CrossEntropyLoss()
+optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
