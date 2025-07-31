@@ -93,3 +93,19 @@ class ResNet(nn.Module):
         layers = []
         layers.append(block(self.in_channels, out_channels, stride, downsample))
         self.in_channels = out_channels
+
+        for i in range(1, blocks):
+            layers.append(block(out_channels, out_channels))
+        return nn.Sequential(*layers)
+    
+    def forward(self, x):
+        out = self.conv(x)
+        out = self.bn(out)
+        out = self.relu(out)
+        out = self.layer1(out)
+        out = self.layer2(out)
+        out = self.layer3(out)
+        out = self.avg_pool(out)
+        out = out.view(out.size(0), -1)
+        out = self.fc(out)
+        return out
