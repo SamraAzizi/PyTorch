@@ -127,3 +127,18 @@ def update_lr(optimizer, lr):
 # Train the model
 total_step = len(train_loader)
 curr_lr = learning_rate
+
+
+for epoch in range(num_epochs):
+    for i, (images, labels) in enumerate(train_loader):
+        images = images.to(device)
+        labels = labels.to(device)
+        
+        # Forward pass
+        outputs = model(images)
+        loss = criterion(outputs, labels)
+        
+        # Backward and optimize
+        optimizer.zero_grad()
+        loss.backward()
+        optimizer.step()
