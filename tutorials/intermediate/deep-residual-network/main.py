@@ -117,3 +117,13 @@ model = ResNet(ResidualBlock, [2, 2, 2]).to(device)
 # Loss and optimizer
 criterion = nn.CrossEntropyLoss()
 optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
+
+
+# For updating learning rate
+def update_lr(optimizer, lr):    
+    for param_group in optimizer.param_groups:
+        param_group['lr'] = lr
+
+# Train the model
+total_step = len(train_loader)
+curr_lr = learning_rate
