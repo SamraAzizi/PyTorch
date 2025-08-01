@@ -25,3 +25,11 @@ corpus = Corpus()
 ids = corpus.get_data('data/train.txt', batch_size)
 vocab_size = len(corpus.dictionary)
 num_batches = ids.size(1) // seq_length
+
+# RNN based language model
+class RNNLM(nn.Module):
+    def __init__(self, vocab_size, embed_size, hidden_size, num_layers):
+        super(RNNLM, self).__init__()
+        self.embed = nn.Embedding(vocab_size, embed_size)
+        self.lstm = nn.LSTM(embed_size, hidden_size, num_layers, batch_first=True)
+        self.linear = nn.Linear(hidden_size, vocab_size)
