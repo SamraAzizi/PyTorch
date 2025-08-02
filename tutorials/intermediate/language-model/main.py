@@ -48,3 +48,11 @@ model = RNNLM(vocab_size, embed_size, hidden_size, num_layers).to(device)
 # Loss and optimizer
 criterion = nn.CrossEntropyLoss()
 optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
+
+# Truncated backpropagation
+def detach(states):
+    return [state.detach() for state in states] 
+
+# Train the model
+for epoch in range(num_epochs):
+    # Set initial hidden and cell states
