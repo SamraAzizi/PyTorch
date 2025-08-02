@@ -80,3 +80,9 @@ for epoch in range(num_epochs):
         step = (i+1) // seq_length
         if step % 100 == 0:
             print ('Epoch [{}/{}], Step[{}/{}], Loss: {:.4f}, Perplexity: {:5.2f}'
+                   .format(epoch+1, num_epochs, step, num_batches, loss.item(), np.exp(loss.item())))
+
+# Test the model
+with torch.no_grad():
+    with open('sample.txt', 'w') as f:
+        # Set intial hidden ane cell states
