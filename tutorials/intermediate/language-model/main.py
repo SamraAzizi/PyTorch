@@ -1,5 +1,3 @@
-# Some part of the code was referenced from below.
-# https://github.com/pytorch/examples/tree/master/word_language_model 
 import torch
 import torch.nn as nn
 import numpy as np
@@ -43,3 +41,10 @@ class RNNLM(nn.Module):
         
         # Reshape output to (batch_size*sequence_length, hidden_size)
         out = out.reshape(out.size(0)*out.size(1), out.size(2))
+
+
+model = RNNLM(vocab_size, embed_size, hidden_size, num_layers).to(device)
+
+# Loss and optimizer
+criterion = nn.CrossEntropyLoss()
+optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
