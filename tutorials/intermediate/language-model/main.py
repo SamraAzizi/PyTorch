@@ -56,3 +56,11 @@ def detach(states):
 # Train the model
 for epoch in range(num_epochs):
     # Set initial hidden and cell states
+
+    states = (torch.zeros(num_layers, batch_size, hidden_size).to(device),
+              torch.zeros(num_layers, batch_size, hidden_size).to(device))
+    
+    for i in range(0, ids.size(1) - seq_length, seq_length):
+        # Get mini-batch inputs and targets
+        inputs = ids[:, i:i+seq_length].to(device)
+        targets = ids[:, (i+1):(i+1)+seq_length].to(device)
