@@ -64,3 +64,12 @@ for epoch in range(num_epochs):
         # Get mini-batch inputs and targets
         inputs = ids[:, i:i+seq_length].to(device)
         targets = ids[:, (i+1):(i+1)+seq_length].to(device)
+
+        # Forward pass
+        states = detach(states)
+        outputs, states = model(inputs, states)
+        loss = criterion(outputs, targets.reshape(-1))
+        
+        # Backward and optimize
+        optimizer.zero_grad()
+        loss.backward()
