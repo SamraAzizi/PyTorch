@@ -73,3 +73,10 @@ for epoch in range(num_epochs):
         # Backward and optimize
         optimizer.zero_grad()
         loss.backward()
+
+        clip_grad_norm_(model.parameters(), 0.5)
+        optimizer.step()
+
+        step = (i+1) // seq_length
+        if step % 100 == 0:
+            print ('Epoch [{}/{}], Step[{}/{}], Loss: {:.4f}, Perplexity: {:5.2f}'
