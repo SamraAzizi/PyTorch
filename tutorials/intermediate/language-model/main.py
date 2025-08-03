@@ -86,3 +86,10 @@ for epoch in range(num_epochs):
 with torch.no_grad():
     with open('sample.txt', 'w') as f:
         # Set intial hidden ane cell states
+
+        state = (torch.zeros(num_layers, 1, hidden_size).to(device),
+                 torch.zeros(num_layers, 1, hidden_size).to(device))
+
+        # Select one word id randomly
+        prob = torch.ones(vocab_size)
+        input = torch.multinomial(prob, num_samples=1).unsqueeze(1).to(device)
