@@ -93,3 +93,11 @@ with torch.no_grad():
         # Select one word id randomly
         prob = torch.ones(vocab_size)
         input = torch.multinomial(prob, num_samples=1).unsqueeze(1).to(device)
+
+        for i in range(num_samples):
+            # Forward propagate RNN 
+            output, state = model(input, state)
+
+            # Sample a word id
+            prob = output.exp()
+            word_id = torch.multinomial(prob, num_samples=1).item()
