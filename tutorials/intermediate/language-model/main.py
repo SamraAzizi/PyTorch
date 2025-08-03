@@ -1,3 +1,5 @@
+# Some part of the code was referenced from below.
+# https://github.com/pytorch/examples/tree/master/word_language_model 
 import torch
 import torch.nn as nn
 import numpy as np
@@ -24,6 +26,7 @@ ids = corpus.get_data('data/train.txt', batch_size)
 vocab_size = len(corpus.dictionary)
 num_batches = ids.size(1) // seq_length
 
+
 # RNN based language model
 class RNNLM(nn.Module):
     def __init__(self, vocab_size, embed_size, hidden_size, num_layers):
@@ -31,8 +34,8 @@ class RNNLM(nn.Module):
         self.embed = nn.Embedding(vocab_size, embed_size)
         self.lstm = nn.LSTM(embed_size, hidden_size, num_layers, batch_first=True)
         self.linear = nn.Linear(hidden_size, vocab_size)
-
-        def forward(self, x, h):
+        
+    def forward(self, x, h):
         # Embed word ids to vectors
         x = self.embed(x)
         
@@ -41,7 +44,10 @@ class RNNLM(nn.Module):
         
         # Reshape output to (batch_size*sequence_length, hidden_size)
         out = out.reshape(out.size(0)*out.size(1), out.size(2))
-
+        
+        # Decode hidden states of all time steps
+        out = self.linear(out)
+        return out, (h, c)
 
 model = RNNLM(vocab_size, embed_size, hidden_size, num_layers).to(device)
 
@@ -56,7 +62,6 @@ def detach(states):
 # Train the model
 for epoch in range(num_epochs):
     # Set initial hidden and cell states
-
     states = (torch.zeros(num_layers, batch_size, hidden_size).to(device),
               torch.zeros(num_layers, batch_size, hidden_size).to(device))
     
@@ -64,7 +69,7 @@ for epoch in range(num_epochs):
         # Get mini-batch inputs and targets
         inputs = ids[:, i:i+seq_length].to(device)
         targets = ids[:, (i+1):(i+1)+seq_length].to(device)
-
+        
         # Forward pass
         states = detach(states)
         outputs, states = model(inputs, states)
@@ -73,7 +78,6 @@ for epoch in range(num_epochs):
         # Backward and optimize
         optimizer.zero_grad()
         loss.backward()
-
         clip_grad_norm_(model.parameters(), 0.5)
         optimizer.step()
 
@@ -86,7 +90,6 @@ for epoch in range(num_epochs):
 with torch.no_grad():
     with open('sample.txt', 'w') as f:
         # Set intial hidden ane cell states
-
         state = (torch.zeros(num_layers, 1, hidden_size).to(device),
                  torch.zeros(num_layers, 1, hidden_size).to(device))
 
@@ -109,3 +112,9 @@ with torch.no_grad():
             word = corpus.dictionary.idx2word[word_id]
             word = '\n' if word == '<eos>' else word + ' '
             f.write(word)
+
+            if (i+1) % 100 == 0:
+                print('Sampled [{}/{}] words and save to {}'.format(i+1, num_samples, 'sample.txt'))
+
+# Save the model checkpoints
+torch.save(model.state_dict(), 'model.ckpt')
