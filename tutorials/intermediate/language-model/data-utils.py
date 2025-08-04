@@ -16,3 +16,14 @@ class Dictionary(object):
     
     def __len__(self):
         return len(self.word2idx)
+    
+    class Corpus(object):
+    def __init__(self):
+        self.dictionary = Dictionary()
+
+    def get_data(self, path, batch_size=20):
+        # Add words to the dictionary
+        with open(path, 'r') as f:
+            tokens = 0
+            for line in f:
+                words = line.split() + ['<eos>']
