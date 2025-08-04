@@ -17,7 +17,7 @@ class Dictionary(object):
     def __len__(self):
         return len(self.word2idx)
     
-    class Corpus(object):
+class Corpus(object):
     def __init__(self):
         self.dictionary = Dictionary()
 
@@ -27,3 +27,13 @@ class Dictionary(object):
             tokens = 0
             for line in f:
                 words = line.split() + ['<eos>']
+
+                tokens += len(words)
+                for word in words: 
+                    self.dictionary.add_word(word)  
+        
+        # Tokenize the file content
+        ids = torch.LongTensor(tokens)
+        token = 0
+        with open(path, 'r') as f:
+            for line in f:
