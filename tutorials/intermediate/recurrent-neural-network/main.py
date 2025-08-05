@@ -16,3 +16,13 @@ num_classes = 10
 batch_size = 100
 num_epochs = 2
 learning_rate = 0.01
+
+# MNIST dataset
+train_dataset = torchvision.datasets.MNIST(root='../../data/',
+                                           train=True, 
+                                           transform=transforms.ToTensor(),
+                                           download=True)
+
+test_dataset = torchvision.datasets.MNIST(root='../../data/',
+                                          train=False, 
+                                          transform=transforms.ToTensor())
