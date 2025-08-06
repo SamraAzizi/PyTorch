@@ -56,3 +56,10 @@ class RNN(nn.Module):
         # Decode the hidden state of the last time step
         out = self.fc(out[:, -1, :])
         return out
+    
+    model = RNN(input_size, hidden_size, num_layers, num_classes).to(device)
+
+
+# Loss and optimizer
+criterion = nn.CrossEntropyLoss()
+optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
