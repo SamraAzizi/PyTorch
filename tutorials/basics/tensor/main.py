@@ -56,3 +56,19 @@ x = torch.rand(2, 2)
 # elementwise addition
 z = x + y
 # torch.add(x,y)
+
+# in place addition, everythin with a trailing underscore is an inplace operation
+# i.e. it will modify the variable
+# y.add_(x)
+
+# substraction
+z = x - y
+z = torch.sub(x, y)
+
+# multiplication
+z = x * y
+z = torch.mul(x,y)
+
+# division
+z = x / y
+z = torch.div(x,y)
