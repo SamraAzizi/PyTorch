@@ -28,3 +28,31 @@ print(x)
 
 # check size
 print(x.size())
+
+# check data type
+print(x.dtype)
+
+# specify types, float32 default
+x = torch.zeros(5, 3, dtype=torch.float16)
+print(x)
+
+# check type
+print(x.dtype)
+
+# construct from data
+x = torch.tensor([5.5, 3])
+print(x.size())
+
+# requires_grad argument
+# This will tell pytorch that it will need to calculate the gradients for this tensor
+# later in your optimization steps
+# i.e. this is a variable in your model that you want to optimize
+x = torch.tensor([5.5, 3], requires_grad=True)
+
+# Operations
+y = torch.rand(2, 2)
+x = torch.rand(2, 2)
+
+# elementwise addition
+z = x + y
+# torch.add(x,y)
