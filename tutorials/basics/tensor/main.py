@@ -106,3 +106,14 @@ print(type(b))
 a.add_(1)
 print(a)
 print(b)
+# numpy to torch with .from_numpy(x)
+import numpy as np
+a = np.ones(5)
+b = torch.from_numpy(a)
+print(a)
+print(b)
+
+# again be careful when modifying
+a += 1
+print(a)
+print(b)
