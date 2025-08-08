@@ -72,3 +72,13 @@ z = torch.mul(x,y)
 # division
 z = x / y
 z = torch.div(x,y)
+
+# Slicing
+x = torch.rand(5,3)
+print(x)
+print(x[:, 0]) # all rows, column 0
+print(x[1, :]) # row 1, all columns
+print(x[1,1]) # element at 1, 1
+
+# Get the actual value if only 1 element in your tensor
+print(x[1,1].item())
