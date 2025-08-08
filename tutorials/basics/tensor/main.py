@@ -94,3 +94,15 @@ print(x.size(), y.size(), z.size())
 # Converting a Torch Tensor to a NumPy array and vice versa is very easy
 a = torch.ones(5)
 print(a)
+
+# torch to numpy with .numpy()
+b = a.numpy()
+print(b)
+print(type(b))
+
+# Carful: If the Tensor is on the CPU (not the GPU),
+# both objects will share the same memory location, so changing one
+# will also change the other
+a.add_(1)
+print(a)
+print(b)
