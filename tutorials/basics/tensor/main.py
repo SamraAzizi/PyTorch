@@ -82,3 +82,15 @@ print(x[1,1]) # element at 1, 1
 
 # Get the actual value if only 1 element in your tensor
 print(x[1,1].item())
+
+# Reshape with torch.view()
+x = torch.randn(4, 4)
+y = x.view(16)
+z = x.view(-1, 8)  # the size -1 is inferred from other dimensions
+# if -1 it pytorch will automatically determine the necessary size
+print(x.size(), y.size(), z.size())
+
+# Numpy
+# Converting a Torch Tensor to a NumPy array and vice versa is very easy
+a = torch.ones(5)
+print(a)
