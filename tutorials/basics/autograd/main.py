@@ -35,3 +35,16 @@ print(x.grad) # dz/dx
 # If a Tensor is non-scalar (more than 1 elements), we need to specify arguments for backward() 
 # specify a gradient argument that is a tensor of matching shape.
 # needed for vector-Jacobian product
+
+x = torch.randn(3, requires_grad=True)
+
+y = x * 2
+for _ in range(10):
+    y = y * 2
+
+print(y)
+print(y.shape)
+
+v = torch.tensor([0.1, 1.0, 0.0001], dtype=torch.float32)
+y.backward(v)
+print(x.grad)
