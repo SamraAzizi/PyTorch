@@ -74,3 +74,15 @@ print(x.grad)
 a = torch.randn(2, 2)
 print(a.requires_grad)
 b = ((a * 3) / (a - 1))
+
+print(b.grad_fn)
+a.requires_grad_(True)
+print(a.requires_grad)
+b = (a * a).sum()
+print(b.grad_fn)
+
+# .detach(): get a new Tensor with the same content but no gradient computation:
+a = torch.randn(2, 2, requires_grad=True)
+print(a.requires_grad)
+b = a.detach()
+print(b.requires_grad)
