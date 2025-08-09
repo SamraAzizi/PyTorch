@@ -23,3 +23,15 @@ print(z)
 # When we finish our computation we can call .backward() and have all the gradients computed automatically.
 # The gradient for this tensor will be accumulated into .grad attribute.
 # It is the partial derivate of the function w.r.t. the tensor
+
+z.backward()
+print(x.grad) # dz/dx
+
+# Generally speaking, torch.autograd is an engine for computing vector-Jacobian product
+# It computes partial derivates while applying the chain rule
+
+# -------------
+# Model with non-scalar output:
+# If a Tensor is non-scalar (more than 1 elements), we need to specify arguments for backward() 
+# specify a gradient argument that is a tensor of matching shape.
+# needed for vector-Jacobian product
