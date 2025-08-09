@@ -61,3 +61,16 @@ print(y.shape)
 v = torch.tensor([0.1, 1.0, 0.0001], dtype=torch.float32)
 y.backward(v)
 print(x.grad)
+
+# -------------
+# Stop a tensor from tracking history:
+# For example during our training loop when we want to update our weights
+# then this update operation should not be part of the gradient computation
+# - x.requires_grad_(False)
+# - x.detach()
+# - wrap in 'with torch.no_grad():'
+
+# .requires_grad_(...) changes an existing flag in-place.
+a = torch.randn(2, 2)
+print(a.requires_grad)
+b = ((a * 3) / (a - 1))
