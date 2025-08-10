@@ -98,3 +98,14 @@ with torch.no_grad():
 # !!! We need to be careful during optimization !!!
 # Use .zero_() to empty the gradients before a new optimization step!
 weights = torch.ones(4, requires_grad=True)
+
+for epoch in range(3):
+    # just a dummy example
+    model_output = (weights*3).sum()
+    model_output.backward()
+    
+    print(weights.grad)
+
+    # optimize model, i.e. adjust weights...
+    with torch.no_grad():
+        weights -= 0.1 * weights.grad
