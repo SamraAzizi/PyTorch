@@ -109,3 +109,16 @@ for epoch in range(3):
     # optimize model, i.e. adjust weights...
     with torch.no_grad():
         weights -= 0.1 * weights.grad
+
+
+# this is important! It affects the final weights & output
+    weights.grad.zero_()
+
+print(weights)
+print(model_output)
+
+# Optimizer has zero_grad() method
+# optimizer = torch.optim.SGD([weights], lr=0.1)
+# During training:
+# optimizer.step()
+# optimizer.zero_grad()
