@@ -86,3 +86,15 @@ a = torch.randn(2, 2, requires_grad=True)
 print(a.requires_grad)
 b = a.detach()
 print(b.requires_grad)
+
+# wrap in 'with torch.no_grad():'
+a = torch.randn(2, 2, requires_grad=True)
+print(a.requires_grad)
+with torch.no_grad():
+    print((x ** 2).requires_grad)
+
+# -------------
+# backward() accumulates the gradient for this tensor into .grad attribute.
+# !!! We need to be careful during optimization !!!
+# Use .zero_() to empty the gradients before a new optimization step!
+weights = torch.ones(4, requires_grad=True)
