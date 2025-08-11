@@ -14,3 +14,15 @@ print(loss)
 # backward pass to compute gradient dLoss/dw
 loss.backward()
 print(w.grad)
+
+# update weights
+# next forward and backward pass...
+
+# continue optimizing:
+# update weights, this operation should not be part of the computational graph
+with torch.no_grad():
+    w -= 0.01 * w.grad
+# don't forget to zero the gradients
+w.grad.zero_()
+
+# next forward and backward pass...
