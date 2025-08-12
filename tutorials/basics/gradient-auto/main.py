@@ -18,3 +18,19 @@ def forward(x):
 # loss = MSE
 def loss(y, y_pred):
     return ((y_pred - y)**2).mean()
+
+print(f'Prediction before training: f(5) = {forward(5).item():.3f}')
+
+# Training
+learning_rate = 0.01
+n_iters = 100
+
+for epoch in range(n_iters):
+    # predict = forward pass
+    y_pred = forward(X)
+
+    # loss
+    l = loss(Y, y_pred)
+
+    # calculate gradients = backward pass
+    l.backward()
