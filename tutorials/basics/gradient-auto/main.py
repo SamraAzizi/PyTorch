@@ -34,3 +34,16 @@ for epoch in range(n_iters):
 
     # calculate gradients = backward pass
     l.backward()
+
+    # update weights
+    #w.data = w.data - learning_rate * w.grad
+    with torch.no_grad():
+        w -= learning_rate * w.grad
+    
+    # zero the gradients after updating
+    w.grad.zero_()
+
+    if epoch % 10 == 0:
+        print(f'epoch {epoch+1}: w = {w.item():.3f}, loss = {l.item():.8f}')
+
+print(f'Prediction after training: f(5) = {forward(5).item():.3f}')
