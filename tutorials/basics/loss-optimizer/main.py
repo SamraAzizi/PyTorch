@@ -33,3 +33,14 @@ n_iters = 100
 loss = nn.MSELoss()
 
 optimizer = torch.optim.SGD([w], lr=learning_rate)
+
+# 3) Training loop
+for epoch in range(n_iters):
+    # predict = forward pass
+    y_predicted = forward(X)
+
+    # loss
+    l = loss(Y, y_predicted)
+
+    # calculate gradients = backward pass
+    l.backward()
