@@ -44,3 +44,14 @@ for epoch in range(n_iters):
 
     # calculate gradients = backward pass
     l.backward()
+
+    # update weights
+    optimizer.step()
+
+    # zero the gradients after updating
+    optimizer.zero_grad()
+
+    if epoch % 10 == 0:
+        print('epoch ', epoch+1, ': w = ', w, ' loss = ', l)
+
+print(f'Prediction after training: f(5) = {forward(5).item():.3f}')
