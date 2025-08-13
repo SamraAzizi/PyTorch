@@ -12,3 +12,13 @@ import torch.nn as nn
 # f = w * x 
 
 # here : f = 2 * x
+
+# 0) Training samples
+X = torch.tensor([1, 2, 3, 4], dtype=torch.float32)
+Y = torch.tensor([2, 4, 6, 8], dtype=torch.float32)
+
+# 1) Design Model: Weights to optimize and forward function
+w = torch.tensor(0.0, dtype=torch.float32, requires_grad=True)
+
+def forward(x):
+    return w * x
