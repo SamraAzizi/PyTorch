@@ -22,3 +22,14 @@ w = torch.tensor(0.0, dtype=torch.float32, requires_grad=True)
 
 def forward(x):
     return w * x
+
+print(f'Prediction before training: f(5) = {forward(5).item():.3f}')
+
+# 2) Define loss and optimizer
+learning_rate = 0.01
+n_iters = 100
+
+# callable function
+loss = nn.MSELoss()
+
+optimizer = torch.optim.SGD([w], lr=learning_rate)
