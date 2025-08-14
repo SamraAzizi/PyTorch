@@ -19,3 +19,13 @@ Y = torch.tensor([[2], [4], [6], [8]], dtype=torch.float32)
 n_samples, n_features = X.shape
 print(f'#samples: {n_samples}, #features: {n_features}')
 # 0) create a test sample
+
+X_test = torch.tensor([5], dtype=torch.float32)
+
+# 1) Design Model, the model has to implement the forward pass!
+# Here we can use a built-in model from PyTorch
+input_size = n_features
+output_size = n_features
+
+# we can call this model with samples X
+model = nn.Linear(input_size, output_size)
