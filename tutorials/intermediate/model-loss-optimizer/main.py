@@ -42,3 +42,12 @@ class LinearRegression(nn.Module):
 
 model = LinearRegression(input_size, output_size)
 '''
+
+print(f'Prediction before training: f(5) = {model(X_test).item():.3f}')
+
+# 2) Define loss and optimizer
+learning_rate = 0.01
+n_iters = 100
+
+loss = nn.MSELoss()
+optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)
