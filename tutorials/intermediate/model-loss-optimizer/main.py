@@ -29,3 +29,16 @@ output_size = n_features
 
 # we can call this model with samples X
 model = nn.Linear(input_size, output_size)
+
+'''
+class LinearRegression(nn.Module):
+    def __init__(self, input_dim, output_dim):
+        super(LinearRegression, self).__init__()
+        # define diferent layers
+        self.lin = nn.Linear(input_dim, output_dim)
+
+    def forward(self, x):
+        return self.lin(x)
+
+model = LinearRegression(input_size, output_size)
+'''
