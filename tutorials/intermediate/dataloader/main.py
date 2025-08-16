@@ -85,3 +85,11 @@ for epoch in range(num_epochs):
         # Run your training process
         if (i+1) % 5 == 0:
             print(f'Epoch: {epoch+1}/{num_epochs}, Step {i+1}/{n_iterations}| Inputs {inputs.shape} | Labels {labels.shape}')
+
+            # some famous datasets are available in torchvision.datasets
+# e.g. MNIST, Fashion-MNIST, CIFAR10, COCO
+
+train_dataset = torchvision.datasets.MNIST(root='./data', 
+                                           train=True, 
+                                           transform=torchvision.transforms.ToTensor(),  
+                                           download=True)
