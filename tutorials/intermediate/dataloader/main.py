@@ -47,3 +47,16 @@ class WineDataset(Dataset):
     # we can call len(dataset) to return the size
     def __len__(self):
         return self.n_samples
+    
+    # create dataset
+dataset = WineDataset()
+
+# get first sample and unpack
+first_data = dataset[0]
+features, labels = first_data
+print(features, labels)
+
+# Load whole dataset with DataLoader
+# shuffle: shuffle data, good for training
+# num_workers: faster loading with multiple subprocesses
+# !!! IF YOU GET AN ERROR DURING LOADING, SET num_workers TO 0 !!!
