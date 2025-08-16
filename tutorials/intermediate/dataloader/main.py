@@ -60,3 +60,14 @@ print(features, labels)
 # shuffle: shuffle data, good for training
 # num_workers: faster loading with multiple subprocesses
 # !!! IF YOU GET AN ERROR DURING LOADING, SET num_workers TO 0 !!!
+
+train_loader = DataLoader(dataset=dataset,
+                          batch_size=4,
+                          shuffle=True,
+                          num_workers=2)
+
+# convert to an iterator and look at one random sample
+dataiter = iter(train_loader)
+data = next(dataiter)
+features, labels = data
+print(features, labels)
