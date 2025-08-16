@@ -71,3 +71,11 @@ dataiter = iter(train_loader)
 data = next(dataiter)
 features, labels = data
 print(features, labels)
+
+
+# Dummy Training loop
+num_epochs = 2
+total_samples = len(dataset)
+n_iterations = math.ceil(total_samples/4)
+print(total_samples, n_iterations)
+for epoch in range(num_epochs):
