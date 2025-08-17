@@ -33,3 +33,14 @@ Compose multiple Transforms
 composed = transforms.Compose([Rescale(256),
                                RandomCrop(224)])
 '''
+
+import torch
+import torchvision
+from torch.utils.data import Dataset
+import numpy as np
+
+
+class WineDataset(Dataset):
+
+    def __init__(self, transform=None):
+        xy = np.loadtxt('./data/wine/wine.csv', delimiter=',', dtype=np.float32, skiprows=1)
