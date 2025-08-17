@@ -14,3 +14,22 @@ Resize, Scale
 On Tensors
 ----------
 LinearTransformation, Normalize, RandomErasing
+
+Conversion
+----------
+ToPILImage: from tensor or ndrarray
+ToTensor : from numpy.ndarray or PILImage
+
+Generic
+-------
+Use Lambda 
+
+Custom
+------
+Write own class
+
+Compose multiple Transforms
+---------------------------
+composed = transforms.Compose([Rescale(256),
+                               RandomCrop(224)])
+'''
