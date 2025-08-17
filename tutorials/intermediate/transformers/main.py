@@ -44,3 +44,13 @@ class WineDataset(Dataset):
 
     def __init__(self, transform=None):
         xy = np.loadtxt('./data/wine/wine.csv', delimiter=',', dtype=np.float32, skiprows=1)
+        self.n_samples = xy.shape[0]
+
+        # note that we do not convert to tensor here
+        self.x_data = xy[:, 1:]
+        self.y_data = xy[:, [0]]
+
+        self.transform = transform
+
+    def __getitem__(self, index):
+        sample = self.x_data[index], self.y_data[index]
