@@ -54,3 +54,13 @@ class WineDataset(Dataset):
 
     def __getitem__(self, index):
         sample = self.x_data[index], self.y_data[index]
+        if self.transform:
+            sample = self.transform(sample)
+
+        return sample
+
+    def __len__(self):
+        return self.n_samples
+
+# Custom Transforms
+# implement __call__(self, sample)
