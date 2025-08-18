@@ -64,3 +64,14 @@ class WineDataset(Dataset):
 
 # Custom Transforms
 # implement __call__(self, sample)
+
+class ToTensor:
+    # Convert ndarrays to Tensors
+    def __call__(self, sample):
+        inputs, targets = sample
+        return torch.from_numpy(inputs), torch.from_numpy(targets)
+
+class MulTransform:
+    # multiply inputs with a given factor
+    def __init__(self, factor):
+        self.factor = factor
