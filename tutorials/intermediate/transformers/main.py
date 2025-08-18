@@ -75,3 +75,11 @@ class MulTransform:
     # multiply inputs with a given factor
     def __init__(self, factor):
         self.factor = factor
+    def __call__(self, sample):
+        inputs, targets = sample
+        inputs *= self.factor
+        return inputs, targets
+
+print('Without Transform')
+dataset = WineDataset()
+first_data = dataset[0]
