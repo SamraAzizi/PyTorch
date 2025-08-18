@@ -83,3 +83,11 @@ class MulTransform:
 print('Without Transform')
 dataset = WineDataset()
 first_data = dataset[0]
+
+features, labels = first_data
+print(type(features), type(labels))
+print(features, labels)
+
+print('\nWith Tensor Transform')
+dataset = WineDataset(transform=ToTensor())
+first_data = dataset[0]
