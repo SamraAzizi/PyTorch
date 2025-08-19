@@ -20,3 +20,14 @@ def softmax(x):
 
 x = np.array([2.0, 1.0, 0.1])
 outputs = softmax(x)
+
+print('softmax numpy:', outputs)
+
+x = torch.tensor([2.0, 1.0, 0.1])
+outputs = torch.softmax(x, dim=0) # along values along first axis
+print('softmax torch:', outputs)
+
+# Cross entropy
+# Cross-entropy loss, or log loss, measures the performance of a classification model 
+# whose output is a probability value between 0 and 1. 
+# -> loss increases as the predicted probability diverges from the actual label
