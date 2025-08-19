@@ -31,3 +31,9 @@ print('softmax torch:', outputs)
 # Cross-entropy loss, or log loss, measures the performance of a classification model 
 # whose output is a probability value between 0 and 1. 
 # -> loss increases as the predicted probability diverges from the actual label
+
+def cross_entropy(actual, predicted):
+    EPS = 1e-15
+    predicted = np.clip(predicted, EPS, 1 - EPS)
+    loss = -np.sum(actual * np.log(predicted))
+    return loss # / float(predicted.shape[0])
