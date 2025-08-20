@@ -84,3 +84,12 @@ print(f'Actual class: {Y.item()}, Y_pred1: {predictions1.item()}, Y_pred2: {pred
 
 # target is of size nBatch = 3
 # each element has class label: 0, 1, or 2
+
+Y = torch.tensor([2, 0, 1])
+
+# input is of size nBatch x nClasses = 3 x 3
+# Y_pred are logits (not softmax)
+Y_pred_good = torch.tensor(
+    [[0.1, 0.2, 3.9], # predict class 2
+    [1.2, 0.1, 0.3], # predict class 0
+    [0.3, 2.2, 0.2]]) # predict class 1
