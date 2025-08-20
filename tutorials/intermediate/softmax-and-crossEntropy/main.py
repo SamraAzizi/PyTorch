@@ -74,3 +74,13 @@ l2 = loss(Y_pred_bad, Y)
 
 print(f'PyTorch Loss1: {l1.item():.4f}')
 print(f'PyTorch Loss2: {l2.item():.4f}')
+
+# get predictions
+_, predictions1 = torch.max(Y_pred_good, 1)
+_, predictions2 = torch.max(Y_pred_bad, 1)
+print(f'Actual class: {Y.item()}, Y_pred1: {predictions1.item()}, Y_pred2: {predictions2.item()}')
+
+# allows batch loss for multiple samples
+
+# target is of size nBatch = 3
+# each element has class label: 0, 1, or 2
