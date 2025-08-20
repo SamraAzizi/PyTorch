@@ -56,3 +56,13 @@ print(f'Loss2 numpy: {l2:.4f}')
 # nn.LogSoftmax + nn.NLLLoss
 # NLLLoss = negative log likelihood loss
 loss = nn.CrossEntropyLoss()
+
+# loss(input, target)
+
+# target is of size nSamples = 1
+# each element has class label: 0, 1, or 2
+# Y (=target) contains class labels, not one-hot
+Y = torch.tensor([0])
+
+# input is of size nSamples x nClasses = 1 x 3
+# y_pred (=input) must be raw, unnormalizes scores (logits) for each class, not softmax
