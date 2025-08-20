@@ -105,3 +105,11 @@ l1 = loss(Y_pred_good, Y)
 l2 = loss(Y_pred_bad, Y)
 print(f'Batch Loss1:  {l1.item():.4f}')
 print(f'Batch Loss2: {l2.item():.4f}')
+
+# get predictions
+_, predictions1 = torch.max(Y_pred_good, 1)
+_, predictions2 = torch.max(Y_pred_bad, 1)
+print(f'Actual class: {Y}, Y_pred1: {predictions1}, Y_pred2: {predictions2}')
+
+# Binary classification
+class NeuralNet1(nn.Module):
