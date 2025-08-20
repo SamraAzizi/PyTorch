@@ -66,3 +66,11 @@ Y = torch.tensor([0])
 
 # input is of size nSamples x nClasses = 1 x 3
 # y_pred (=input) must be raw, unnormalizes scores (logits) for each class, not softmax
+
+Y_pred_good = torch.tensor([[2.0, 1.0, 0.1]])
+Y_pred_bad = torch.tensor([[0.5, 2.0, 0.3]])
+l1 = loss(Y_pred_good, Y)
+l2 = loss(Y_pred_bad, Y)
+
+print(f'PyTorch Loss1: {l1.item():.4f}')
+print(f'PyTorch Loss2: {l2.item():.4f}')
