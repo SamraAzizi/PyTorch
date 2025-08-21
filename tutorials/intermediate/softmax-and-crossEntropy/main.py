@@ -128,3 +128,10 @@ class NeuralNet1(nn.Module):
         return y_pred
 
 model = NeuralNet1(input_size=28*28, hidden_size=5)
+
+criterion = nn.BCELoss()
+
+# Multiclass problem
+class NeuralNet2(nn.Module):
+    def __init__(self, input_size, hidden_size, num_classes):
+        super(NeuralNet2, self).__init__()
