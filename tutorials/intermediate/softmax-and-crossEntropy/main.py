@@ -113,3 +113,10 @@ print(f'Actual class: {Y}, Y_pred1: {predictions1}, Y_pred2: {predictions2}')
 
 # Binary classification
 class NeuralNet1(nn.Module):
+     def __init__(self, input_size, hidden_size):
+        super(NeuralNet1, self).__init__()
+        self.linear1 = nn.Linear(input_size, hidden_size) 
+        self.relu = nn.ReLU()
+        self.linear2 = nn.Linear(hidden_size, 1)  
+    
+    def forward(self, x):
