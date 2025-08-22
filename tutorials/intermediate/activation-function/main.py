@@ -35,3 +35,14 @@ print(output)
 relu = nn.ReLU()
 output = relu(x)
 print(output)
+
+# leaky relu
+output = F.leaky_relu(x)
+print(output)
+lrelu = nn.LeakyReLU()
+output = lrelu(x)
+print(output)
+
+#nn.ReLU() creates an nn.Module which you can add e.g. to an nn.Sequential model.
+#torch.relu on the other side is just the functional API call to the relu function,
+#so that you can add it e.g. in your forward method yourself.
