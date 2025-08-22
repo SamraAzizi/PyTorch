@@ -16,3 +16,12 @@ print(output)
 # sigmoid 
 output = torch.sigmoid(x)
 print(output)
+
+s = nn.Sigmoid()
+output = s(x)
+print(output)
+
+#tanh
+output = torch.tanh(x)
+print(output)
+t = nn.Tanh()
