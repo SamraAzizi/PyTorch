@@ -16,7 +16,6 @@ print(output)
 # sigmoid 
 output = torch.sigmoid(x)
 print(output)
-
 s = nn.Sigmoid()
 output = s(x)
 print(output)
@@ -25,7 +24,6 @@ print(output)
 output = torch.tanh(x)
 print(output)
 t = nn.Tanh()
-
 output = t(x)
 print(output)
 
@@ -55,7 +53,7 @@ class NeuralNet(nn.Module):
         self.relu = nn.ReLU()
         self.linear2 = nn.Linear(hidden_size, 1)
         self.sigmoid = nn.Sigmoid()
-
+    
     def forward(self, x):
         out = self.linear1(x)
         out = self.relu(out)
@@ -64,10 +62,13 @@ class NeuralNet(nn.Module):
         return out
 
 # option 2 (use activation functions directly in forward pass)
-
 class NeuralNet(nn.Module):
     def __init__(self, input_size, hidden_size):
         super(NeuralNet, self).__init__()
         self.linear1 = nn.Linear(input_size, hidden_size)
         self.linear2 = nn.Linear(hidden_size, 1)
     
+    def forward(self, x):
+        out = torch.relu(self.linear1(x))
+        out = torch.sigmoid(self.linear2(out))
+        return out
