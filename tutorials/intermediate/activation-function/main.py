@@ -46,3 +46,12 @@ print(output)
 #nn.ReLU() creates an nn.Module which you can add e.g. to an nn.Sequential model.
 #torch.relu on the other side is just the functional API call to the relu function,
 #so that you can add it e.g. in your forward method yourself.
+
+# option 1 (create nn modules)
+class NeuralNet(nn.Module):
+    def __init__(self, input_size, hidden_size):
+        super(NeuralNet, self).__init__()
+        self.linear1 = nn.Linear(input_size, hidden_size)
+        self.relu = nn.ReLU()
+        self.linear2 = nn.Linear(hidden_size, 1)
+        self.sigmoid = nn.Sigmoid()
