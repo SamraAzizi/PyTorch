@@ -40,3 +40,17 @@ y=np.linspace(-10,10,100)
 plt.plot(y,tanh(y),'b', label='linspace(-10,10,100)')
 
 plt.grid(linestyle='--')
+
+plt.xlabel('X Axis')
+
+plt.ylabel('Y Axis')
+
+plt.title('TanH Function')
+
+plt.xticks([-4, -3, -2, -1, 0, 1, 2, 3, 4])
+plt.yticks([-4, -3, -2, -1, 0, 1, 2, 3, 4])
+
+plt.ylim(-4, 4)
+plt.xlim(-4, 4)
+
+plt.show()
