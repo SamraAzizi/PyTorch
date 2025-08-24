@@ -18,3 +18,14 @@ plt.xlabel('X Axis')
 plt.ylabel('Y Axis')
 
 plt.title('Sigmoid Function')
+
+plt.xticks([-4, -3, -2, -1, 0, 1, 2, 3, 4])
+plt.yticks([-2, -1, 0, 1, 2])
+
+plt.ylim(-2, 2)
+plt.xlim(-4, 4)
+
+plt.show()
+#plt.savefig('sigmoid.png')
+
+fig = plt.figure()
