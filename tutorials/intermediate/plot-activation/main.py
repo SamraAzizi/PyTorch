@@ -29,3 +29,14 @@ plt.show()
 #plt.savefig('sigmoid.png')
 
 fig = plt.figure()
+
+##### TanH
+tanh = lambda x: 2*sigmoid(2*x)-1
+
+x=np.linspace(-10,10,10)
+
+y=np.linspace(-10,10,100)
+
+plt.plot(y,tanh(y),'b', label='linspace(-10,10,100)')
+
+plt.grid(linestyle='--')
