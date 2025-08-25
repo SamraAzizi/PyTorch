@@ -115,3 +115,15 @@ plt.xlim(-4, 4)
 
 plt.show()
 #plt.savefig('lrelu.png')
+
+fig = plt.figure()
+
+
+##### Binary Step
+bstep = lambda x: np.where(x>=0, 1, 0)
+
+x=np.linspace(-10,10,10)
+
+y=np.linspace(-10,10,1000)
+
+plt.plot(y,bstep(y),'b', label='linspace(-10,10,100)')
