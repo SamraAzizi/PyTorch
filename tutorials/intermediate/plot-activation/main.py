@@ -83,3 +83,18 @@ plt.yticks([-4, -3, -2, -1, 0, 1, 2, 3, 4])
 
 plt.ylim(-4, 4)
 plt.xlim(-4, 4)
+
+
+plt.show()
+#plt.savefig('relu.png')
+
+fig = plt.figure()
+
+##### Leaky ReLU
+leakyrelu = lambda x: np.where(x>=0, x, 0.1*x)
+
+x=np.linspace(-10,10,10)
+
+y=np.linspace(-10,10,1000)
+
+plt.plot(y,leakyrelu(y),'b', label='linspace(-10,10,100)')
