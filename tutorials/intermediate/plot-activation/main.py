@@ -54,8 +54,6 @@ plt.ylim(-4, 4)
 plt.xlim(-4, 4)
 
 plt.show()
-
-
 #plt.savefig('tanh.png')
 
 fig = plt.figure()
@@ -68,7 +66,6 @@ x=np.linspace(-10,10,10)
 y=np.linspace(-10,10,1000)
 
 plt.plot(y,relu(y),'b', label='linspace(-10,10,100)')
-
 
 plt.grid(linestyle='--')
 
@@ -83,7 +80,6 @@ plt.yticks([-4, -3, -2, -1, 0, 1, 2, 3, 4])
 
 plt.ylim(-4, 4)
 plt.xlim(-4, 4)
-
 
 plt.show()
 #plt.savefig('relu.png')
@@ -127,3 +123,22 @@ x=np.linspace(-10,10,10)
 y=np.linspace(-10,10,1000)
 
 plt.plot(y,bstep(y),'b', label='linspace(-10,10,100)')
+
+plt.grid(linestyle='--')
+
+plt.xlabel('X Axis')
+
+plt.ylabel('Y Axis')
+
+plt.title('Step Function')
+
+plt.xticks([-4, -3, -2, -1, 0, 1, 2, 3, 4])
+plt.yticks([-2, -1, 0, 1, 2])
+
+plt.ylim(-2, 2)
+plt.xlim(-4, 4)
+
+plt.show()
+#plt.savefig('step.png')
+
+print('done')
