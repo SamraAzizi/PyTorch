@@ -54,3 +54,17 @@ plt.ylim(-4, 4)
 plt.xlim(-4, 4)
 
 plt.show()
+
+
+#plt.savefig('tanh.png')
+
+fig = plt.figure()
+
+##### ReLU
+relu = lambda x: np.where(x>=0, x, 0)
+
+x=np.linspace(-10,10,10)
+
+y=np.linspace(-10,10,1000)
+
+plt.plot(y,relu(y),'b', label='linspace(-10,10,100)')
