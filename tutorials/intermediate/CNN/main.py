@@ -17,3 +17,8 @@ learning_rate = 0.001
 # dataset has PILImage images of range [0, 1]. 
 # We transform them to Tensors of normalized range [-1, 1]
 transform = transforms.Compose(
+    [transforms.ToTensor(),
+     transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
+
+# CIFAR10: 60000 32x32 color images in 10 classes, with 6000 images per class
+train_dataset = torchvision.datasets.CIFAR10(root='./data', train=True,
