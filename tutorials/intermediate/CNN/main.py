@@ -68,3 +68,11 @@ class ConvNet(nn.Module):
         x = F.relu(self.fc2(x))               # -> n, 84
         x = self.fc3(x)                       # -> n, 10
         return x
+    
+
+model = ConvNet().to(device)
+
+criterion = nn.CrossEntropyLoss()
+optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)
+
+n_total_steps = len(train_loader)
