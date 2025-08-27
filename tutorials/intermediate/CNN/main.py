@@ -83,3 +83,12 @@ for epoch in range(num_epochs):
         # input_layer: 3 input channels, 6 output channels, 5 kernel size
         images = images.to(device)
         labels = labels.to(device)
+
+        # Forward pass
+        outputs = model(images)
+        loss = criterion(outputs, labels)
+
+        # Backward and optimize
+        optimizer.zero_grad()
+        loss.backward()
+        optimizer.step()
