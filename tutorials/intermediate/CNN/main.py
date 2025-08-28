@@ -107,3 +107,10 @@ with torch.no_grad():
     n_class_correct = [0 for i in range(10)]
     n_class_samples = [0 for i in range(10)]
     for images, labels in test_loader:
+        images = images.to(device)
+        labels = labels.to(device)
+        outputs = model(images)
+        # max returns (value ,index)
+        _, predicted = torch.max(outputs, 1)
+        n_samples += labels.size(0)
+        n_correct += (predicted == labels).sum().item()
