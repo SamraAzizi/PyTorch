@@ -100,3 +100,10 @@ for epoch in range(num_epochs):
 print('Finished Training')
 PATH = './cnn.pth'
 torch.save(model.state_dict(), PATH)
+
+with torch.no_grad():
+    n_correct = 0
+    n_samples = 0
+    n_class_correct = [0 for i in range(10)]
+    n_class_samples = [0 for i in range(10)]
+    for images, labels in test_loader:
