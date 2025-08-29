@@ -15,3 +15,8 @@ std = np.array([0.25, 0.25, 0.25])
 
 data_transforms = {
     'train': transforms.Compose([
+        transforms.RandomResizedCrop(224),
+        transforms.RandomHorizontalFlip(),
+        transforms.ToTensor(),
+        transforms.Normalize(mean, std)
+    ]),
