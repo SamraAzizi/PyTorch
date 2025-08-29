@@ -9,3 +9,9 @@ import matplotlib.pyplot as plt
 import time
 import os
 import copy
+
+mean = np.array([0.5, 0.5, 0.5])
+std = np.array([0.25, 0.25, 0.25])
+
+data_transforms = {
+    'train': transforms.Compose([
