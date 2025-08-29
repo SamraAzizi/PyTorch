@@ -20,3 +20,10 @@ data_transforms = {
         transforms.ToTensor(),
         transforms.Normalize(mean, std)
     ]),
+    'val': transforms.Compose([
+        transforms.Resize(256),
+        transforms.CenterCrop(224),
+        transforms.ToTensor(),
+        transforms.Normalize(mean, std)
+    ]),
+}
