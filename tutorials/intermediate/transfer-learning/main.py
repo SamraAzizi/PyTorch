@@ -41,3 +41,12 @@ class_names = image_datasets['train'].classes
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 print(class_names)
+
+def imshow(inp, title):
+    """Imshow for Tensor."""
+    inp = inp.numpy().transpose((1, 2, 0))
+    inp = std * inp + mean
+    inp = np.clip(inp, 0, 1)
+    plt.imshow(inp)
+    plt.title(title)
+    plt.show()
