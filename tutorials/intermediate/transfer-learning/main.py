@@ -50,3 +50,9 @@ def imshow(inp, title):
     plt.imshow(inp)
     plt.title(title)
     plt.show()
+
+    # Get a batch of training data
+inputs, classes = next(iter(dataloaders['train']))
+
+# Make a grid from batch
+out = torchvision.utils.make_grid(inputs)
