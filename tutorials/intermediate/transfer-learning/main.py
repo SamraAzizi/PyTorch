@@ -149,3 +149,14 @@ optimizer = optim.SGD(model.parameters(), lr=0.001)
 
 # StepLR Decays the learning rate of each parameter group by gamma every step_size epochs
 # Decay LR by a factor of 0.1 every 7 epochs
+
+# Learning rate scheduling should be applied after optimizer’s update
+# e.g., you should write your code this way:
+# for epoch in range(100):
+#     train(...)
+#     validate(...)
+#     scheduler.step()
+
+step_lr_scheduler = lr_scheduler.StepLR(optimizer, step_size=7, gamma=0.1)
+
+model = train_model(model, criterion, optimizer, step_lr_scheduler, num_epochs=25)
