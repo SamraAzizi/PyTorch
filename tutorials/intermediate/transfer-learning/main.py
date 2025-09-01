@@ -160,3 +160,11 @@ optimizer = optim.SGD(model.parameters(), lr=0.001)
 step_lr_scheduler = lr_scheduler.StepLR(optimizer, step_size=7, gamma=0.1)
 
 model = train_model(model, criterion, optimizer, step_lr_scheduler, num_epochs=25)
+
+
+#### ConvNet as fixed feature extractor ####
+# Here, we need to freeze all the network except the final layer.
+# We need to set requires_grad == False to freeze the parameters so that the gradients are not computed in backward()
+model_conv = torchvision.models.resnet18(pretrained=True)
+for param in model_conv.parameters():
+    param.requires_grad = False
