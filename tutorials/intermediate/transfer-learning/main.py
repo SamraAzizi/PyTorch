@@ -139,3 +139,13 @@ num_ftrs = model.fc.in_features
 # Here the size of each output sample is set to 2.
 # Alternatively, it can be generalized to nn.Linear(num_ftrs, len(class_names)).
 model.fc = nn.Linear(num_ftrs, 2)
+
+model = model.to(device)
+
+criterion = nn.CrossEntropyLoss()
+
+# Observe that all parameters are being optimized
+optimizer = optim.SGD(model.parameters(), lr=0.001)
+
+# StepLR Decays the learning rate of each parameter group by gamma every step_size epochs
+# Decay LR by a factor of 0.1 every 7 epochs
