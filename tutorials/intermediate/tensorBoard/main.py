@@ -45,3 +45,15 @@ test_loader = torch.utils.data.DataLoader(dataset=test_dataset,
 
 examples = iter(test_loader)
 example_data, example_targets = next(examples)
+
+for i in range(6):
+    plt.subplot(2,3,i+1)
+    plt.imshow(example_data[i][0], cmap='gray')
+#plt.show()
+
+############## TENSORBOARD ########################
+img_grid = torchvision.utils.make_grid(example_data)
+writer.add_image('mnist_images', img_grid)
+#writer.close()
+#sys.exit()
+###################################################
