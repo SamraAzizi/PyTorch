@@ -91,3 +91,10 @@ writer.add_graph(model, example_data.reshape(-1, 28*28).to(device))
 running_loss = 0.0
 running_correct = 0
 n_total_steps = len(train_loader)
+
+for epoch in range(num_epochs):
+    for i, (images, labels) in enumerate(train_loader):  
+        # origin shape: [100, 1, 28, 28]
+        # resized: [100, 784]
+        images = images.reshape(-1, 28*28).to(device)
+        labels = labels.to(device)
