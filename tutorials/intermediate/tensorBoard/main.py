@@ -81,3 +81,13 @@ criterion = nn.CrossEntropyLoss()
 optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)  
 
 ############## TENSORBOARD ########################
+
+writer.add_graph(model, example_data.reshape(-1, 28*28).to(device))
+#writer.close()
+#sys.exit()
+###################################################
+
+# Train the model
+running_loss = 0.0
+running_correct = 0
+n_total_steps = len(train_loader)
