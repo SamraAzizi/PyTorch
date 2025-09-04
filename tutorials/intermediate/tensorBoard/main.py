@@ -137,3 +137,10 @@ with torch.no_grad():
         images = images.reshape(-1, 28*28).to(device)
         labels = labels.to(device)
         outputs = model(images)
+
+        # max returns (value ,index)
+        values, predicted = torch.max(outputs.data, 1)
+        n_samples += labels.size(0)
+        n_correct += (predicted == labels).sum().item()
+
+        class_probs_batch = [F.softmax(output, dim=0) for output in outputs]
