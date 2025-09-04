@@ -98,3 +98,15 @@ for epoch in range(num_epochs):
         # resized: [100, 784]
         images = images.reshape(-1, 28*28).to(device)
         labels = labels.to(device)
+
+
+        # Forward pass
+        outputs = model(images)
+        loss = criterion(outputs, labels)
+        
+        # Backward and optimize
+        optimizer.zero_grad()
+        loss.backward()
+        optimizer.step()
+        
+        running_loss += loss.item()
