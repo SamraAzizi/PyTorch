@@ -110,3 +110,10 @@ for epoch in range(num_epochs):
         optimizer.step()
         
         running_loss += loss.item()
+
+        _, predicted = torch.max(outputs.data, 1)
+        running_correct += (predicted == labels).sum().item()
+        if (i+1) % 100 == 0:
+            print (f'Epoch [{epoch+1}/{num_epochs}], Step [{i+1}/{n_total_steps}], Loss: {loss.item():.4f}')
+            ############## TENSORBOARD ########################
+            writer.add_scalar('training loss', running_loss / 100, epoch * n_total_steps + i)
