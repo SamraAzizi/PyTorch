@@ -144,3 +144,12 @@ with torch.no_grad():
         n_correct += (predicted == labels).sum().item()
 
         class_probs_batch = [F.softmax(output, dim=0) for output in outputs]
+
+        class_preds.append(class_probs_batch)
+        class_labels.append(labels)
+
+    # 10000, 10, and 10000, 1
+    # stack concatenates tensors along a new dimension
+    # cat concatenates tensors in the given dimension
+    class_preds = torch.cat([torch.stack(batch) for batch in class_preds])
+    class_labels = torch.cat(class_labels)
