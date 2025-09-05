@@ -10,3 +10,16 @@ import torch.nn as nn
 ''' 2 DIFFERENT WAYS OF SAVING
 # 1) lazy way: save whole model
 torch.save(model, PATH)
+
+# model class must be defined somewhere
+model = torch.load(PATH)
+model.eval()
+
+# 2) recommended way: save only the state_dict
+torch.save(model.state_dict(), PATH)
+
+# model must be created again with parameters
+model = Model(*args, **kwargs)
+model.load_state_dict(torch.load(PATH))
+model.eval()
+'''
