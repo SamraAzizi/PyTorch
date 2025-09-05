@@ -8,7 +8,6 @@ import matplotlib.pyplot as plt
 import sys
 import torch.nn.functional as F
 from torch.utils.tensorboard import SummaryWriter
-
 # default `log_dir` is "runs" - we'll be more specific here
 writer = SummaryWriter('runs/mnist1')
 ###################################################
@@ -66,7 +65,7 @@ class NeuralNet(nn.Module):
         self.l1 = nn.Linear(input_size, hidden_size) 
         self.relu = nn.ReLU()
         self.l2 = nn.Linear(hidden_size, num_classes)  
-
+    
     def forward(self, x):
         out = self.l1(x)
         out = self.relu(out)
@@ -81,7 +80,6 @@ criterion = nn.CrossEntropyLoss()
 optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)  
 
 ############## TENSORBOARD ########################
-
 writer.add_graph(model, example_data.reshape(-1, 28*28).to(device))
 #writer.close()
 #sys.exit()
@@ -91,15 +89,13 @@ writer.add_graph(model, example_data.reshape(-1, 28*28).to(device))
 running_loss = 0.0
 running_correct = 0
 n_total_steps = len(train_loader)
-
 for epoch in range(num_epochs):
     for i, (images, labels) in enumerate(train_loader):  
         # origin shape: [100, 1, 28, 28]
         # resized: [100, 784]
         images = images.reshape(-1, 28*28).to(device)
         labels = labels.to(device)
-
-
+        
         # Forward pass
         outputs = model(images)
         loss = criterion(outputs, labels)
@@ -117,8 +113,6 @@ for epoch in range(num_epochs):
             print (f'Epoch [{epoch+1}/{num_epochs}], Step [{i+1}/{n_total_steps}], Loss: {loss.item():.4f}')
             ############## TENSORBOARD ########################
             writer.add_scalar('training loss', running_loss / 100, epoch * n_total_steps + i)
-
-
             running_accuracy = running_correct / 100 / predicted.size(0)
             writer.add_scalar('accuracy', running_accuracy, epoch * n_total_steps + i)
             running_correct = 0
@@ -127,7 +121,6 @@ for epoch in range(num_epochs):
 
 # Test the model
 # In test phase, we don't need to compute gradients (for memory efficiency)
-
 class_labels = []
 class_preds = []
 with torch.no_grad():
@@ -137,7 +130,6 @@ with torch.no_grad():
         images = images.reshape(-1, 28*28).to(device)
         labels = labels.to(device)
         outputs = model(images)
-
         # max returns (value ,index)
         values, predicted = torch.max(outputs.data, 1)
         n_samples += labels.size(0)
@@ -153,3 +145,15 @@ with torch.no_grad():
     # cat concatenates tensors in the given dimension
     class_preds = torch.cat([torch.stack(batch) for batch in class_preds])
     class_labels = torch.cat(class_labels)
+
+    acc = 100.0 * n_correct / n_samples
+    print(f'Accuracy of the network on the 10000 test images: {acc} %')
+
+    ############## TENSORBOARD ########################
+    classes = range(10)
+    for i in classes:
+        labels_i = class_labels == i
+        preds_i = class_preds[:, i]
+        writer.add_pr_curve(str(i), labels_i, preds_i, global_step=0)
+        writer.close()
+    ###################################################
