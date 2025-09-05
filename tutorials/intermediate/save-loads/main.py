@@ -23,3 +23,15 @@ model = Model(*args, **kwargs)
 model.load_state_dict(torch.load(PATH))
 model.eval()
 '''
+
+class Model(nn.Module):
+    def __init__(self, n_input_features):
+        super(Model, self).__init__()
+        self.linear = nn.Linear(n_input_features, 1)
+
+    def forward(self, x):
+        y_pred = torch.sigmoid(self.linear(x))
+        return y_pred
+
+model = Model(n_input_features=6)
+# train your model...
