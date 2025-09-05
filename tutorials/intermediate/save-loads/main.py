@@ -35,3 +35,18 @@ class Model(nn.Module):
 
 model = Model(n_input_features=6)
 # train your model...
+
+####################save all ######################################
+for param in model.parameters():
+    print(param)
+
+# save and load entire model
+
+FILE = "model.pth"
+torch.save(model, FILE)
+
+loaded_model = torch.load(FILE)
+loaded_model.eval()
+
+for param in loaded_model.parameters():
+    print(param)
