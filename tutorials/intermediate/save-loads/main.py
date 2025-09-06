@@ -50,3 +50,28 @@ loaded_model.eval()
 
 for param in loaded_model.parameters():
     print(param)
+
+
+############save only state dict #########################
+
+# save only state dict
+FILE = "model.pth"
+torch.save(model.state_dict(), FILE)
+
+print(model.state_dict())
+loaded_model = Model(n_input_features=6)
+loaded_model.load_state_dict(torch.load(FILE)) # it takes the loaded dictionary, not the path file itself
+loaded_model.eval()
+
+print(loaded_model.state_dict())
+
+###########load checkpoint#####################
+learning_rate = 0.01
+optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)
+
+checkpoint = {
+"epoch": 90,
+"model_state": model.state_dict(),
+"optim_state": optimizer.state_dict()
+}
+print(optimizer.state_dict())
