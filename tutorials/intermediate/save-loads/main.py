@@ -99,3 +99,12 @@ print(optimizer.state_dict())
 # call model.train() to ensure these layers are in training mode.
 
 """ SAVING ON GPU/CPU 
+
+# 1) Save on GPU, Load on CPU
+device = torch.device("cuda")
+model.to(device)
+torch.save(model.state_dict(), PATH)
+
+device = torch.device('cpu')
+model = Model(*args, **kwargs)
+model.load_state_dict(torch.load(PATH, map_location=device))
