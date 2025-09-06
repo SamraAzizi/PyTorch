@@ -87,3 +87,15 @@ optimizer.load_state_dict(checkpoint['optim_state'])
 epoch = checkpoint['epoch']
 
 model.eval()
+
+# - or -
+# model.train()
+
+print(optimizer.state_dict())
+
+# Remember that you must call model.eval() to set dropout and batch normalization layers 
+# to evaluation mode before running inference. Failing to do this will yield 
+# inconsistent inference results. If you wish to resuming training, 
+# call model.train() to ensure these layers are in training mode.
+
+""" SAVING ON GPU/CPU 
