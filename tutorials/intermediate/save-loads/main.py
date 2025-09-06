@@ -75,3 +75,15 @@ checkpoint = {
 "optim_state": optimizer.state_dict()
 }
 print(optimizer.state_dict())
+FILE = "checkpoint.pth"
+torch.save(checkpoint, FILE)
+
+model = Model(n_input_features=6)
+optimizer = torch.optim.SGD(model.parameters(), lr=0)
+
+checkpoint = torch.load(FILE)
+model.load_state_dict(checkpoint['model_state'])
+optimizer.load_state_dict(checkpoint['optim_state'])
+epoch = checkpoint['epoch']
+
+model.eval()
